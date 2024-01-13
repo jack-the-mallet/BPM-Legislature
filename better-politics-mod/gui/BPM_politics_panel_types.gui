@@ -473,11 +473,15 @@
 
 						textbox = {
 							margin_left = 10
-							layoutpolicy_horizontal = growing
+							layoutpolicy_horizontal = shrinking
+							autoresize = yes
+							minimumsize = { 60 0 }
 							align = nobaseline
 							text = "#v ([InterestGroup.GetApprovalValue|=+])#!"
 							tooltip = "IG_APPROVAL_BREAKDOWN"
 						}
+
+						expand = {}
 
 						# dynamicgridbox = {
 						#	visible = "[Not(IsDataModelEmpty(InterestGroup.GetAgitators))]"
@@ -489,8 +493,59 @@
 						#	}
 						# }
 
+						### LAW SUPPORT
+						hbox = {
+							visible = "[Country.IsEnactingLaw]"
+							tooltip = "[InterestGroup.MakeScope.GetScriptValueDesc('bpm_ig_law_support_total_value')]"
+							textbox = {
+								margin_right = 5
+								autoresize = yes
+								align = nobaseline|left
+								text = "#v Law Support#!"
+							}
+							icon = {
+								visible = "[GreaterThan_CFixedPoint(InterestGroup.MakeScope.ScriptValue('bpm_ig_law_support_total_value'), '(CFixedPoint)0')]"
+								texture = "gfx/interface/icons/generic_icons/approval_icon.dds"
+								size = { 24 24 }
+							}
+							icon = {
+								visible = "[LessThanOrEqualTo_CFixedPoint(InterestGroup.MakeScope.ScriptValue('bpm_ig_law_support_total_value'), '(CFixedPoint)0')]"
+								texture = "gfx/interface/icons/generic_icons/disapproval_icon.dds"
+								size = { 24 24 }
+							}
+							widget = {
+								size = { 5 5 }
+							}
+							textbox = {
+								# margin_left = 5
+								autoresize = yes
+								minimumsize = { 60 0 }
+								layoutpolicy_horizontal = growing
+								align = nobaseline|left
+								tooltip = "[InterestGroup.MakeScope.GetScriptValueDesc('bpm_ig_law_support_total_value')]"
+								text = "#v (#variable [InterestGroup.MakeScope.ScriptValue('bpm_ig_law_support_total_value')|=+d1])#!"
+							}
+							widget = {
+								parentanchor = top
+								size = { 50 23 }
+								button_icon_square = {
+									parentanchor = center
+									size = { 40 25 }
+									icon = {
+										texture = "gfx/interface/buttons/button_icons/plus.dds"
+										size = { 23 23 }
+										parentanchor = center
+									}
+									blockoverride "frame_visible" {
+										visible = no
+									}
+								}
+							}
+						}
+
 						### IDEOLOGIES
 						dynamicgridbox = {
+							visible = "[Not(Country.IsEnactingLaw)]"
 							flipdirection = yes
 							name = "ideologies_box"
 							datamodel = "[InterestGroup.AccessIntrinsicIdeologies]"

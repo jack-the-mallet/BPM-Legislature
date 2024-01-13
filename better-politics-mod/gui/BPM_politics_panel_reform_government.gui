@@ -310,109 +310,127 @@
 					}
 					
 					widget = {
-						layoutpolicy_horizontal = expanding
-						layoutpolicy_vertical = expanding
+						size = { 10 10 }
 					}
-					
-					# radicals
 					hbox = {
 						layoutpolicy_horizontal = expanding
-						layoutpolicy_vertical = preferred
-						spacing = 5
-						using = radicals_tooltip_with_graph
-						margin = { 5 0 }
-						
-						textbox = {
+						vbox = {
 							layoutpolicy_horizontal = expanding
-							size = { 0 20 }
-							text = "RADICALS"
-							elide = right
-						}
-						icon = {
-							texture = "gfx/interface/icons/generic_icons/population_radical.dds"
-							size = { 40 40 }
-						}
-						textbox = {
-							layoutpolicy_horizontal = expanding
-							size = { 0 20 }
-							text = "#variable [Country.GetNumRadicals|D]#!"
-							align = left|nobaseline
-						}
-						hbox = {
-							layoutpolicy_horizontal = expanding
-							layoutpolicy_vertical = preferred
-							
-							widget = {
+							# radicals
+							hbox = {
 								layoutpolicy_horizontal = expanding
-								size = { 0 20 }
-								visible = "[And(NotEqualTo_int32(ReformGovernment.GetPredictedRadicalsDelta, '(int32)0'),GetVariableSystem.Exists('reform_government'))]"
-								
-								background = {
-									using = dark_area_rounded
-									margin = { 0 2 }
-									margin_left = 15
-								}
+								layoutpolicy_vertical = preferred
+								spacing = 5
+								using = radicals_tooltip_with_graph
+								margin = { 5 0 }
 								
 								textbox = {
-									size = { 100% 100% }
-									text = "[ReformGovernment.GetPredictedRadicalsDelta|D=-]"
+									layoutpolicy_horizontal = expanding
+									size = { 0 20 }
+									text = "RADICALS"
+									elide = right
+								}
+								icon = {
+									texture = "gfx/interface/icons/generic_icons/population_radical.dds"
+									size = { 40 40 }
+								}
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									size = { 0 20 }
+									text = "#variable [Country.GetNumRadicals|D]#!"
 									align = left|nobaseline
-									using = fontsize_large
-									default_format = "#variable"
-									using = look_at_me_text_animation
+								}
+								hbox = {
+									layoutpolicy_horizontal = expanding
+									layoutpolicy_vertical = preferred
+									
+									widget = {
+										layoutpolicy_horizontal = expanding
+										size = { 0 20 }
+										visible = "[And(NotEqualTo_int32(ReformGovernment.GetPredictedRadicalsDelta, '(int32)0'),GetVariableSystem.Exists('reform_government'))]"
+										
+										background = {
+											using = dark_area_rounded
+											margin = { 0 2 }
+											margin_left = 15
+										}
+										
+										textbox = {
+											size = { 100% 100% }
+											text = "[ReformGovernment.GetPredictedRadicalsDelta|D=-]"
+											align = left|nobaseline
+											using = fontsize_large
+											default_format = "#variable"
+											using = look_at_me_text_animation
+										}
+									}
+								}
+							}
+							
+							# loyalists
+							hbox = {
+								layoutpolicy_horizontal = expanding
+								layoutpolicy_vertical = preferred
+								spacing = 5
+								using = loyalists_tooltip_with_graph
+								margin = { 5 0 }
+								
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									size = { 0 20 }
+									text = "LOYALISTS"
+									elide = right
+								}
+								icon = {
+									texture = "gfx/interface/icons/generic_icons/population_loyalist.dds"
+									size = { 40 40 }
+								}
+								textbox = {
+									layoutpolicy_horizontal = expanding
+									size = { 0 20 }
+									text = "#variable [Country.GetNumLoyalists|D]#!"
+									align = left|nobaseline
+								}
+								
+								hbox = {
+									layoutpolicy_horizontal = expanding
+									layoutpolicy_vertical = preferred
+									
+									widget = {
+										layoutpolicy_horizontal = expanding
+										size = { 0 20 }
+										visible = "[And(NotEqualTo_int32(ReformGovernment.GetPredictedLoyalistsDelta, '(int32)0'),GetVariableSystem.Exists('reform_government'))]"
+										
+										background = {
+											using = dark_area_rounded
+											margin = { 0 2 }
+											margin_left = 15
+										}
+										
+										textbox = {
+											size = { 100% 100% }
+											text = "[ReformGovernment.GetPredictedLoyalistsDelta|D=+]"
+											align = left|nobaseline
+											using = fontsize_large
+											default_format = "#variable"
+											using = look_at_me_text_animation
+										}
+									}
 								}
 							}
 						}
-					}
-					
-					# loyalists
-					hbox = {
-						layoutpolicy_horizontal = expanding
-						layoutpolicy_vertical = preferred
-						spacing = 5
-						using = loyalists_tooltip_with_graph
-						margin = { 5 0 }
-						
-						textbox = {
-							layoutpolicy_horizontal = expanding
-							size = { 0 20 }
-							text = "LOYALISTS"
-							elide = right
+						widget = {
+							size = { 10 10 }
 						}
-						icon = {
-							texture = "gfx/interface/icons/generic_icons/population_loyalist.dds"
-							size = { 40 40 }
-						}
-						textbox = {
-							layoutpolicy_horizontal = expanding
-							size = { 0 20 }
-							text = "#variable [Country.GetNumLoyalists|D]#!"
-							align = left|nobaseline
-						}
-						
-						hbox = {
-							layoutpolicy_horizontal = expanding
-							layoutpolicy_vertical = preferred
-							
-							widget = {
-								layoutpolicy_horizontal = expanding
-								size = { 0 20 }
-								visible = "[And(NotEqualTo_int32(ReformGovernment.GetPredictedLoyalistsDelta, '(int32)0'),GetVariableSystem.Exists('reform_government'))]"
-								
-								background = {
-									using = dark_area_rounded
-									margin = { 0 2 }
-									margin_left = 15
-								}
-								
-								textbox = {
-									size = { 100% 100% }
-									text = "[ReformGovernment.GetPredictedLoyalistsDelta|D=+]"
-									align = left|nobaseline
-									using = fontsize_large
-									default_format = "#variable"
-									using = look_at_me_text_animation
-								}
+						# CALL ELECTION
+						vbox = {
+							layoutpolicy_horizontal = preferred
+							button_standard = {
+								size = { 140 40 }
+								enabled = "[And(Not(AccessPlayer.IsInElectionCampaignPeriod), AccessPlayer.HasElections)]"
+								# using = default_button_primary
+								onclick = "[ExecuteConsoleCommand('event bpm_election_buttons.1')]"
+								text = BPM_CALL_ELECTION_BUTTON
 							}
 						}
 					}

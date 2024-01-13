@@ -1,0 +1,124 @@
+﻿bpm_set_ig_enacting_law_stance_to_number = {
+	set_variable = { name = bpm_ig_enacting_law_stance value = 0 }
+
+	if = {
+		limit = { owner = { enacting_any_law = yes }}
+		if = {
+			limit = {
+				law_stance = {
+					law = owner.currently_enacting_law.type
+					value = strongly_approve
+				}
+			}
+			set_variable = { name = bpm_ig_enacting_law_stance value = 2 }
+		}
+		else_if = {
+			limit = {
+				law_stance = {
+					law = owner.currently_enacting_law.type
+					value = approve
+				}
+			}
+			set_variable = { name = bpm_ig_enacting_law_stance value = 1 }
+		}
+		else_if = {
+			limit = {
+				law_stance = {
+					law = owner.currently_enacting_law.type
+					value = disapprove
+				}
+			}
+			set_variable = { name = bpm_ig_enacting_law_stance value = -1 }
+		}
+		else_if = {
+			limit = {
+				law_stance = {
+					law = owner.currently_enacting_law.type
+					value = strongly_disapprove
+				}
+			}
+			set_variable = { name = bpm_ig_enacting_law_stance value = -2 }
+		}
+	}
+}
+
+bpm_set_ig_current_law_stance_to_number = {
+	set_variable = { name = bpm_ig_current_law_stance value = 0 }
+
+	save_scope_as = stance_ig
+
+	owner = {
+		every_law = {
+			limit = { 
+				type = { is_same_law_group_as = prev.owner.currently_enacting_law.type }
+				owner = { has_law = prev.type }
+			}
+			scope:stance_ig = {
+				set_variable = { name = current_law value = prev }
+			}
+		}
+	}
+	if = {
+		limit = {
+			law_stance = {
+				law = var:current_law.type
+				value = strongly_approve
+			}
+		}
+		set_variable = { name = bpm_ig_current_law_stance value = 2 }
+	}
+	else_if = {
+		limit = {
+			law_stance = {
+				law = var:current_law.type
+				value = approve
+			}
+		}
+		set_variable = { name = bpm_ig_current_law_stance value = 1 }
+	}
+	else_if = {
+		limit = {
+			law_stance = {
+				law = var:current_law.type
+				value = disapprove
+			}
+		}
+		set_variable = { name = bpm_ig_current_law_stance value = -1 }
+	}
+	else_if = {
+		limit = {
+			law_stance = {
+				law = var:current_law.type
+				value = strongly_disapprove
+			}
+		}
+		set_variable = { name = bpm_ig_current_law_stance value = -2 }
+	}
+}
+
+bpm_set_ig_law_support_enacting_law = {
+	set_variable = { 
+		name = bpm_ig_law_support_enacting_law
+		value = {
+			add = var:bpm_ig_enacting_law_stance
+			multiply = 25
+		}
+	}
+}
+
+bpm_set_ig_law_support_current_law = {
+	set_variable = { 
+		name = bpm_ig_law_support_current_law
+		value = {
+			subtract = var:bpm_ig_current_law_stance
+			multiply = 15
+		}
+	}
+}
+
+bpm_set_ig_law_support_fixed_vars = {
+	bpm_set_ig_enacting_law_stance_to_number = yes
+	bpm_set_ig_current_law_stance_to_number = yes
+	bpm_set_ig_law_support_enacting_law = yes
+	bpm_set_ig_law_support_current_law = yes
+}

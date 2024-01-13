@@ -1,0 +1,30 @@
+﻿bpm_ig_law_support_total_value = {
+	value = 0
+
+	if = {
+		limit = { has_variable = bpm_ig_law_support_enacting_law }
+		add = {
+			value = var:bpm_ig_law_support_enacting_law
+			desc = "bpm_ig_law_support_enacting_law"
+		}
+	}
+
+	if = {
+		limit = { has_variable = bpm_ig_law_support_current_law }
+		add = {
+			value = var:bpm_ig_law_support_current_law
+			desc = "bpm_ig_law_support_current_law"
+		}
+	}
+
+	if = {
+		limit = { has_variable = bpm_ig_law_support_from_party_whip }
+		add = {
+			value = var:bpm_ig_law_support_from_party_whip
+			desc = "bpm_ig_law_support_from_party_whip"
+		}
+	}
+
+	min = -100
+	max = 100
+}

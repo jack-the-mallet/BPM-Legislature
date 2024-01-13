@@ -126,6 +126,12 @@ on_party_created = {
 	}
 }
 
+on_law_enactment_started = {
+	on_actions = {
+		on_bpm_law_enactment_started
+	}
+}
+
 on_bpm_yearly_pulse_country = {
 	events = {
 		#bpm_1st_intl.1
@@ -487,6 +493,14 @@ on_bpm_party_created = {
 				game_date > 1836.1.1
 			}
 			bpm_set_new_party_loyalty = yes
+		}
+	}
+}
+
+on_bpm_law_enactment_started = {
+	effect = {
+		every_interest_group = {
+			bpm_set_ig_law_support_fixed_vars = yes
 		}
 	}
 }
