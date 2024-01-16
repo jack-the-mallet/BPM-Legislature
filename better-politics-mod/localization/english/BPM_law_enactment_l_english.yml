@@ -1,2 +1,10 @@
 ﻿l_english:
  bpm_ig_law_support_tooltip:0 "[InterestGroup.MakeScope.GetScriptValueDesc('bpm_ig_law_support_total_value')]"
+ bpm_ig_law_support_current_law:0 "From #yellow Current#! [concept_law]"
+ bpm_ig_law_support_current_law_like:0 "From #yellow Likes Current#! [concept_law]"
+ bpm_ig_law_support_current_law_dislike:0 "From #yellow Dislikes Current#! [concept_law]"
+ bpm_ig_law_support_enacting_law:0 "From [concept_law] #yellow Under Consideration#!"
+ bpm_ig_law_support_from_party_whip:0 "From [concept_party_whip] [concept_law] #yellow Support#! × [Concept('concept_clout', '% Clout Difference')]"
+ bpm_ig_law_support_from_low_approval:0 "From #red Low [concept_approval]#!"
+ bpm_ig_law_support_from_very_low_approval:0 "From #red Very Low [concept_approval]#!"
+ bpm_ig_law_support_from_ruler:0 "From [Concept('concept_ruler','Head of State')] [concept_law] #yellow Support#!"

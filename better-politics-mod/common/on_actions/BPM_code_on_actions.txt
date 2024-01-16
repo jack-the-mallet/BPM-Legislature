@@ -499,8 +499,6 @@ on_bpm_party_created = {
 
 on_bpm_law_enactment_started = {
 	effect = {
-		every_interest_group = {
-			bpm_set_ig_law_support_fixed_vars = yes
-		}
+		bpm_set_all_igs_law_support_fixed_vars = yes
 	}
 }

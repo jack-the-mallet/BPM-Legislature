@@ -495,7 +495,7 @@
 
 						### LAW SUPPORT
 						hbox = {
-							visible = "[Country.IsEnactingLaw]"
+							visible = "[And(Country.IsEnactingLaw, Not(InterestGroup.IsMarginal))]"
 							tooltip = "[InterestGroup.MakeScope.GetScriptValueDesc('bpm_ig_law_support_total_value')]"
 							textbox = {
 								margin_right = 5
@@ -545,7 +545,7 @@
 
 						### IDEOLOGIES
 						dynamicgridbox = {
-							visible = "[Not(Country.IsEnactingLaw)]"
+							visible = "[Or(Not(Country.IsEnactingLaw), InterestGroup.IsMarginal)]"
 							flipdirection = yes
 							name = "ideologies_box"
 							datamodel = "[InterestGroup.AccessIntrinsicIdeologies]"
