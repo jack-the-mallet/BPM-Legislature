@@ -13,7 +13,7 @@ liberal_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_national_civic_union
+				desc = party_liberal_arg
 				trigger = {
 					exists = c:ARG
 					THIS = c:ARG
@@ -41,25 +41,16 @@ liberal_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_republican_party
+				desc = party_liberal_fra
 				trigger = {
 					exists = c:FRA
 					THIS = c:FRA
-					NOR = { 
-						has_law = law_type:law_monarchy 
-						has_law = law_type:law_theocracy
 					}
-				}
 			}
 			triggered_desc = {
-				desc = party_of_movement
+				desc = party_liberal_brz
 				trigger = {
-					exists = c:FRA
-					THIS = c:FRA
-					OR = { 
-						has_law = law_type:law_monarchy 
-						has_law = law_type:law_theocracy
-					}
+					country_has_primary_culture = cu:brazilian
 				}
 			}
 			triggered_desc = {
@@ -140,27 +131,28 @@ liberal_party = {
 				}
 			}
 			triggered_desc = {
-				desc = party_empire_reform_association
+				desc = party_liberal_chi
 				trigger = {
-					exists = c:CHI
-					THIS = c:CHI
-					has_law = law_type:law_monarchy
+					OR = {
+						AND = {
+							exists = c:CHI
+							THIS = c:CHI
+						}
+						country_has_primary_culture = cu:han
+						country_has_primary_culture = cu:hakka
+						country_has_primary_culture = cu:miao
+						country_has_primary_culture = cu:min
+						country_has_primary_culture = cu:zhuang
+						country_has_primary_culture = cu:yi
+						country_has_primary_culture = cu:yue
+					}
 				}
 			}
 			triggered_desc = {
-				desc = party_freedom_and_accord_party
+				desc = party_liberal_tur
 				trigger = {
 					exists = c:TUR
 					THIS = c:TUR
-					has_law = law_type:law_monarchy
-				}
-			}
-			triggered_desc = {
-				desc = party_progressive_republican_party
-				trigger = {
-					exists = c:TUR
-					THIS = c:TUR
-					NOT = { has_law = law_type:law_monarchy }
 				}
 			}
 			triggered_desc = {
@@ -230,6 +222,13 @@ liberal_party = {
 				}
 			}
 			triggered_desc = {
+				desc = party_liberal_mex
+				trigger = {
+					exists = c:MEX
+					THIS = c:MEX
+				}
+			}
+			triggered_desc = {
 				desc = party_liberal
 				trigger = {
 					always = yes
@@ -266,16 +265,34 @@ liberal_party = {
 		NOR = {
 			bpm_ig_is_traditionalist = yes
 			bpm_ig_is_fascist = yes
-			AND = {
-				bpm_ig_is_socialist = yes
-				bpm_ig_is_moderate_socialist = no
-			}
+			bpm_ig_is_actually_desiring_socialism = yes
 		}
+		NOT = { # unreformed conservatives should not join the liberals
+			bpm_ig_is_non_paternal_conservative = yes 
+		} 
 	}
 	join_weight = {
 		value = {
 			value = 0
 			desc = "base_value"
+		}
+		if = {
+			limit = {
+				leader = { has_variable = liberal_party_leader }
+			}
+			add = {
+				value = 100
+				desc = "bpm_historical_leader"
+			}
+		}
+		if = {
+			limit = {
+				leader = { has_variable = anti_liberal_party_leader }
+			}
+			add = {
+				value = -100
+				desc = "bpm_historical_leader"
+			}
 		}
 		if = {
 			limit = {
@@ -630,12 +647,64 @@ liberal_party = {
 				desc = "from_serfdom"
 			}
 		}
-		if = { # marlibs don't love radicals
+		if = { # imperial brazilian liberals like descentralism
 			limit = {
-				OR = {
-					is_interest_group_type = ig_market_liberals
-					is_interest_group_type = ig_national_liberals
+				owner = {
+					country_has_primary_culture = cu:brazilian
+					OR = { 
+						has_law = law_type:law_monarchy 
+						has_law = law_type:law_theocracy
+					}
 				}
+				OR = {
+					has_ideology = ideology:ideology_sta_minimal_state
+					has_ideology = ideology:ideology_sta_decentralized_state
+					has_ideology = ideology:ideology_sta_federated_state
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_descentralism"
+			}
+		}
+		if = { # north andean and mexican liberals like descentralism
+			limit = {
+				owner = {
+					OR = {
+						country_has_primary_culture = cu:north_andean
+						country_has_primary_culture = cu:mexican
+					}
+				}
+				OR = {
+					has_ideology = ideology:ideology_sta_minimal_state
+					has_ideology = ideology:ideology_sta_decentralized_state
+					has_ideology = ideology:ideology_sta_federated_state
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_descentralism"
+			}
+		}
+		if = { # platinean liberals like centralism
+			limit = {
+				owner = {
+					country_has_primary_culture = cu:platinean
+					NOT = { THIS = c:PRG }
+				}
+				OR = {
+					has_ideology = ideology:ideology_sta_powerful_state
+					has_ideology = ideology:ideology_sta_security_state
+				}
+			}
+			add = {
+				value = 10
+				desc = "from_centralism"
+			}
+		}
+		if = { # conservative-liberals don't love radicals
+			limit = {
+				bpm_ig_is_liberal_conservative = yes
 				leader = { 
 					bpm_leader_is_radical_liberal = no
 				}
@@ -705,13 +774,100 @@ liberal_party = {
 				owner = {
 					any_interest_group = {
 						has_ideology = ideology:ideology_wel_paternalistic_welfare
-						party ?= { is_party_type = liberal_party }
+						has_party = yes
+						party = { is_party_type = liberal_party }
 					}
 				}
 			}
 			add = {
 				value = -5
 				desc = "bpm_from_dislike_paternalists"
+			}
+		}
+		if = { # Conservatives don't like liberals
+			limit = {
+				is_interest_group_type = ig_conservatives
+				owner = {
+					NAND = {
+						any_interest_group = {
+							is_powerful = no
+							OR = {
+								is_interest_group_type = ig_liberals
+								leader = { bpm_leader_is_moderate_liberal = yes }
+							}
+						}
+						any_interest_group = {
+							is_powerful = no
+							OR = {
+								bpm_ig_is_fascist = yes
+								leader = { bpm_leader_is_fascist = yes }
+							}
+						}
+						any_interest_group = {
+							is_powerful = yes
+							OR = {
+								bpm_ig_is_socialist = yes
+								leader = { bpm_leader_is_socialist = yes }
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = -3
+				desc = "bpm_from_conservative_ig"
+			}
+		}
+		if = { # Conservatives join against socialism
+			limit = {
+				bpm_ig_is_liberal_conservative = yes
+				is_powerful = no
+				owner = {
+					AND = {
+						any_interest_group = {
+							is_powerful = no
+							OR = {
+								is_interest_group_type = ig_liberals
+								leader = { bpm_leader_is_moderate_liberal = yes }
+							}
+						}
+						any_interest_group = {
+							is_powerful = no
+							OR = {
+								bpm_ig_is_fascist = yes
+								leader = { bpm_leader_is_fascist = yes }
+							}
+						}
+						any_interest_group = {
+							is_powerful = yes
+							OR = {
+								bpm_ig_is_socialist = yes
+								leader = { bpm_leader_is_socialist = yes }
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = 5
+				desc = "bpm_from_powerful_socialists"
+			}
+		}
+		if = { # conservatives and moderates will join in council republic
+			limit = {
+				OR = {
+					OR = {
+						bpm_ig_is_moderate_conservative = yes
+						bpm_ig_is_liberal_conservative = yes
+					}
+					leader = { has_ideology = ideology:ideology_moderate }
+					leader = { bpm_leader_is_conservative = yes }
+				}
+				owner = { has_law = law_type:law_council_republic }
+			}
+			add = {
+				value = 10
+				desc = "bpm_from_liberals_in_soviet"
 			}
 		}
 		if = { # Anti-electoralism
@@ -731,6 +887,6 @@ liberal_party = {
 				value = -30
 				desc = "bpm_strongly_anti_electoralist"
 			}
-		}
+		}	
 	}
 }

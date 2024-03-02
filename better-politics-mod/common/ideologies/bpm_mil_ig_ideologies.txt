@@ -12,6 +12,7 @@ ideology_jingoist = {
 
     lawgroup_colonization = {
 		law_no_colonial_affairs = disapprove
+		law_frontier_colonization = neutral
 		law_colonial_resettlement = neutral
 		law_colonial_exploitation = approve
 	}
@@ -38,8 +39,17 @@ ideology_mil_emergency = {
 
     lawgroup_colonization = {
 		law_no_colonial_affairs = neutral
+		law_frontier_colonization = neutral
 		law_colonial_resettlement = neutral
 		law_colonial_exploitation = disapprove
+	}
+
+	lawgroup_officers = {
+		law_noble_officers = strongly_disapprove
+		law_purchased_officers = disapprove
+		law_professional_officers = approve
+		law_political_officers = disapprove
+		law_elected_officers = strongly_disapprove
 	}
 
 }
@@ -56,6 +66,7 @@ ideology_mil_patriotic = {
 
     lawgroup_colonization = {
 		law_no_colonial_affairs = disapprove
+		law_frontier_colonization = approve
 		law_colonial_resettlement = neutral
 		law_colonial_exploitation = approve
 	}
@@ -82,8 +93,9 @@ ideology_mil_frontier_expansion = {
 
     lawgroup_colonization = {
 		law_no_colonial_affairs = neutral
-		law_colonial_resettlement = strongly_approve
-		law_colonial_exploitation = approve
+		law_frontier_colonization = strongly_approve
+		law_colonial_resettlement = neutral
+		law_colonial_exploitation = neutral
 	}
 
 }
@@ -100,13 +112,14 @@ ideology_mil_antimilitarist = {
 
     lawgroup_colonization = {
 		law_no_colonial_affairs = strongly_approve
+		law_frontier_colonization = disapprove
 		law_colonial_resettlement = disapprove
 		law_colonial_exploitation = disapprove
 	}
 
 	lawgroup_officers = {
 		law_noble_officers = strongly_disapprove
-		law_purchased_officers = disapprove
+		law_purchased_officers = strongly_disapprove
 		law_professional_officers = disapprove
 		law_political_officers = disapprove
 		law_elected_officers = approve
@@ -126,6 +139,7 @@ ideology_mil_aristocratic_militarist = {
 
     lawgroup_colonization = {
 		law_no_colonial_affairs = disapprove
+		law_frontier_colonization = neutral
 		law_colonial_resettlement = disapprove
 		law_colonial_exploitation = neutral
 	}
@@ -152,13 +166,14 @@ ideology_mil_mass_army = {
 
     lawgroup_colonization = {
 		law_no_colonial_affairs = disapprove
+		law_frontier_colonization = neutral
 		law_colonial_resettlement = disapprove
 		law_colonial_exploitation = neutral
 	}
 
 	lawgroup_officers = {
 		law_noble_officers = strongly_disapprove
-		law_purchased_officers = disapprove
+		law_purchased_officers = strongly_disapprove
 		law_professional_officers = neutral
 		law_political_officers = strongly_approve
 		law_elected_officers = approve
