@@ -2,111 +2,122 @@
 	value = 0
 
 	if = {
-		limit = { has_variable = bpm_ig_law_support_enacting_law }
-		add = {
-			value = var:bpm_ig_law_support_enacting_law
-			desc = "bpm_ig_law_support_enacting_law"
-		}
-	}
-
-	if = {
-		limit = { has_variable = bpm_ig_law_support_current_law }
+		limit = { owner = { enacting_any_law = yes } }
 		if = {
-			limit = { var:bpm_ig_law_support_current_law < 0 }
+			limit = { has_variable = bpm_ig_law_support_enacting_law }
 			add = {
-				value = var:bpm_ig_law_support_current_law
-				desc = "bpm_ig_law_support_current_law_like"
+				value = var:bpm_ig_law_support_enacting_law
+				desc = "bpm_ig_law_support_enacting_law"
+			}
+		}
+	
+		if = {
+			limit = { has_variable = bpm_ig_law_support_current_law }
+			if = {
+				limit = {
+					var:bpm_ig_law_support_current_law < 0
+					var:bpm_ig_law_support_enacting_law < 0
+				}
+				add = {
+					value = var:bpm_ig_law_support_current_law
+					desc = "bpm_ig_law_support_current_law_like"
+				}
+			}
+			else_if = {
+				limit = {
+					var:bpm_ig_law_support_current_law > 0
+					var:bpm_ig_law_support_enacting_law > 0
+				}
+				add = {
+					value = var:bpm_ig_law_support_current_law
+					desc = "bpm_ig_law_support_current_law_dislike"
+				}
+			}
+		}
+	
+		if = {
+			limit = { has_variable = bpm_ig_fixed_law_support_from_party_whip }
+			add = {
+				value = var:bpm_ig_fixed_law_support_from_party_whip
+				# Weigh by clout difference with party whip
+				multiply = {
+					add = var:bpm_most_powerful_ig.ig_clout
+					subtract = this.ig_clout
+					divide = var:bpm_most_powerful_ig.ig_clout
+				}
+				desc = "bpm_ig_law_support_from_party_whip"
+			}
+		}
+	
+		if = {
+			limit = {
+				ig_approval < -10
+				law_stance = {
+					law = owner.currently_enacting_law.type
+					value < strongly_approve
+				}
+			}
+			add = {
+				value = -100
+				desc = "bpm_ig_law_support_from_very_low_approval"
 			}
 		}
 		else_if = {
-			limit = { var:bpm_ig_law_support_current_law > 0 }
+			limit = {
+				ig_approval < 0
+				law_stance = {
+					law = owner.currently_enacting_law.type
+					value < approve
+				}
+			}
 			add = {
-				value = var:bpm_ig_law_support_current_law
-				desc = "bpm_ig_law_support_current_law_dislike"
+				value = ig_approval
+				desc = "bpm_ig_law_support_from_low_approval"
 			}
 		}
-	}
-
-	if = {
-		limit = { has_variable = bpm_ig_fixed_law_support_from_party_whip }
-		add = {
-			value = var:bpm_ig_fixed_law_support_from_party_whip
-			# Weigh by clout difference with party whip
-			multiply = {
-				add = var:bpm_most_powerful_ig.ig_clout
-				subtract = this.ig_clout
-				divide = var:bpm_most_powerful_ig.ig_clout
-			}
-			desc = "bpm_ig_law_support_from_party_whip"
-		}
-	}
-
-	if = {
-		limit = {
-			ig_approval <= -10
-			law_stance = {
-				law = owner.currently_enacting_law.type
-				value < strongly_approve
-			}
-		}
-		add = {
-			value = -100
-			desc = "bpm_ig_law_support_from_very_low_approval"
-		}
-	}
-	else_if = {
-		limit = {
-			ig_approval < 0
-			law_stance = {
-				law = owner.currently_enacting_law.type
-				value < approve
-			}
-		}
-		add = {
-			value = ig_approval
-			desc = "bpm_ig_law_support_from_low_approval"
-		}
-	}
-
-	if = {
-		limit = {
-			owner.ruler = {
-				has_variable = bpm_ig_law_support_enacting_law
-				has_variable = bpm_ig_law_support_current_law
-				interest_group = {
+	
+		if = {
+			limit = {
+				owner.ruler = {
 					has_variable = bpm_ig_law_support_enacting_law
 					has_variable = bpm_ig_law_support_current_law
+					interest_group = {
+						has_variable = bpm_ig_law_support_enacting_law
+						has_variable = bpm_ig_law_support_current_law
+					}
 				}
 			}
-		}
-		add = {
-			if = {
-				# If no ruler stance, use interest group stance
-				limit = {
-					owner.ruler.var:bpm_ig_law_support_enacting_law = 0
-					owner.ruler.var:bpm_ig_law_support_current_law = 0
+			add = {
+				if = {
+					# If no ruler stance, use interest group stance
+					limit = {
+						owner.ruler.var:bpm_ig_law_support_enacting_law = 0
+						owner.ruler.var:bpm_ig_law_support_current_law = 0
+					}
+					add = owner.ruler.interest_group.var:bpm_ig_law_support_enacting_law
 				}
-				add = owner.ruler.interest_group.var:bpm_ig_law_support_enacting_law
-				add = owner.ruler.interest_group.var:bpm_ig_law_support_current_law
+				else = {
+					add = owner.ruler.var:bpm_ig_law_support_enacting_law
+				}
+	
+				if = {
+					limit = { owner = { has_law = law_type:law_autocracy } }
+					multiply = 0.5
+				}
+				else_if = {
+					limit = { owner = { has_law = law_type:law_presidential_republic } }
+					multiply = 0.1
+				}
+				else_if = {
+					limit = { owner = { has_law = law_type:law_monarchy } }
+					multiply = 0.2
+				}
+				else = {
+					multiply = 0
+				}
+				desc = "bpm_ig_law_support_from_ruler"
 			}
-			else = {
-				add = owner.ruler.var:bpm_ig_law_support_enacting_law
-				add = owner.ruler.var:bpm_ig_law_support_current_law
-			}
-
-			if = {
-				limit = { owner = { has_law = law_type:law_autocracy } }
-				multiply = 1
-			}
-			else_if = {
-				limit = { owner = { has_law = law_type:law_presidential_republic } }
-				multiply = 0.25
-			}
-			else = {
-				multiply = 0
-			}
-			desc = "bpm_ig_law_support_from_ruler"
-		}
+		}	
 	}
 
 	min = -100
@@ -114,11 +125,11 @@
 }
 
 bpm_law_enactment_yea_votes = {
+	value = 0
 	every_interest_group = {
 		limit = {
 			is_marginal = no
-			has_variable = bpm_ig_law_support_total_value
-			var:bpm_ig_law_support_total_value > 0
+			bpm_ig_law_support_total_value > 0
 		}
 		add = {
 			value = ig_clout
@@ -127,11 +138,11 @@ bpm_law_enactment_yea_votes = {
 }
 
 bpm_law_enactment_nay_votes = {
+	value = 0
 	every_interest_group = {
 		limit = {
 			is_marginal = no
-			has_variable = bpm_ig_law_support_total_value
-			var:bpm_ig_law_support_total_value <= 0
+			bpm_ig_law_support_total_value <= 0
 		}
 		add = {
 			value = ig_clout

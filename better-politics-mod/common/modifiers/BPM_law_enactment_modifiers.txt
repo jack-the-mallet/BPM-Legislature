@@ -1,0 +1,4 @@
+﻿bpm_law_voting_guarantee_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_law_enactment_success_add = 100
+}

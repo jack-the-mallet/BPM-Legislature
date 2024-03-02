@@ -894,4 +894,27 @@
 			}
 		}
 	}
+
+	type politics_panel_law_voting_item = hbox {
+		gold_progressbar_horizontal = {
+			name = "bpm_law_voting"
+			layoutpolicy_horizontal = expanding
+			size = { 100 15 }
+			tooltip = "bpm_law_voting_tooltip"
+			blockoverride "values" {
+				value = "[GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_yea_votes')]"
+				min = 0
+				max = 1
+			}
+		}
+		textbox = {
+			# margin_left = 5
+			autoresize = yes
+			minimumsize = { 60 0 }
+			layoutpolicy_horizontal = growing
+			align = nobaseline|left
+			tooltip = "[GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_yea_votes')]"
+			text = "#v (#variable [GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_yea_votes')])#!"
+		}
+	}
 }

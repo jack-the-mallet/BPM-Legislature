@@ -150,7 +150,7 @@ bpm_set_ig_fixed_law_support_from_party_whip = {
 			# Unweighted law support
 			value = {
 				add = var:bpm_most_powerful_ig.var:bpm_ig_law_support_enacting_law
-				add = var:bpm_most_powerful_ig.var:bpm_ig_law_support_current_law
+				# add = var:bpm_most_powerful_ig.var:bpm_ig_law_support_current_law
 			}
 		}
 	}

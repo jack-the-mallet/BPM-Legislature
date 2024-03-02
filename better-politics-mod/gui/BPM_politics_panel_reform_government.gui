@@ -35,6 +35,12 @@
 				}
 			}
 			
+			# law voting
+			politics_panel_law_voting_item = {
+				visible = yes
+				# visible = "[Not(GetVariableSystem.Exists('reform_government'))]"
+			}
+
 			### HEADER
 			hbox = {
 				name = "tutorial_highlight_government_title"
