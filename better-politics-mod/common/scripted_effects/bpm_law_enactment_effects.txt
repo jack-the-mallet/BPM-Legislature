@@ -96,22 +96,12 @@ bpm_set_ig_current_law_stance_to_number = {
 	}
 }
 
-bpm_set_ig_law_support_enacting_law = {
+bpm_set_ig_enacting_law_change_steps = {
 	set_variable = { 
-		name = bpm_ig_law_support_enacting_law
+		name = bpm_ig_enacting_law_change_steps
 		value = {
 			add = var:bpm_ig_enacting_law_stance
-			multiply = 25
-		}
-	}
-}
-
-bpm_set_ig_law_support_current_law = {
-	set_variable = { 
-		name = bpm_ig_law_support_current_law
-		value = {
 			subtract = var:bpm_ig_current_law_stance
-			multiply = 15
 		}
 	}
 }
@@ -142,15 +132,15 @@ bpm_set_party_whip_ig = {
 	}
 }
 
-bpm_set_ig_fixed_law_support_from_party_whip = {
+bpm_set_ig_party_whip_enacting_law_change_steps = {
 	if = {
 		limit = { has_variable = bpm_most_powerful_ig }
 		set_variable = {
-			name = bpm_ig_fixed_law_support_from_party_whip
+			name = bpm_ig_party_whip_enacting_law_change_steps
 			# Unweighted law support
 			value = {
-				add = var:bpm_most_powerful_ig.var:bpm_ig_law_support_enacting_law
-				# add = var:bpm_most_powerful_ig.var:bpm_ig_law_support_current_law
+				add = var:bpm_most_powerful_ig.var:bpm_ig_enacting_law_stance
+				subtract = var:bpm_most_powerful_ig.var:bpm_ig_current_law_stance
 			}
 		}
 	}
@@ -164,8 +154,7 @@ bpm_set_ig_law_support_ruler = {
 		owner.ruler = {
 			bpm_set_ig_enacting_law_stance_to_number = yes
 			bpm_set_ig_current_law_stance_to_number = yes
-			bpm_set_ig_law_support_enacting_law = yes
-			bpm_set_ig_law_support_current_law = yes
+			bpm_set_ig_enacting_law_change_steps = yes
 		}
 	}
 }
@@ -173,8 +162,7 @@ bpm_set_ig_law_support_ruler = {
 bpm_set_ig_law_support_fixed_vars = {
 	bpm_set_ig_enacting_law_stance_to_number = yes
 	bpm_set_ig_current_law_stance_to_number = yes
-	bpm_set_ig_law_support_enacting_law = yes
-	bpm_set_ig_law_support_current_law = yes
+	bpm_set_ig_enacting_law_change_steps = yes
 }
 
 bpm_set_all_igs_law_support_fixed_vars = {
@@ -185,7 +173,17 @@ bpm_set_all_igs_law_support_fixed_vars = {
 		bpm_set_party_whip_ig = yes
 	}
 	every_interest_group = {
-		bpm_set_ig_fixed_law_support_from_party_whip = yes
+		bpm_set_ig_party_whip_enacting_law_change_steps = yes
 	}
 	bpm_set_ig_law_support_ruler = yes
+}
+
+bpm_clear_law_sway_vars = {
+	every_interest_group = {
+		remove_variable = bpm_assert_authority_sway_used
+		remove_variable = bpm_assert_authority_neg_sway_used
+		remove_variable = bpm_redeem_favors_sway_used
+		remove_variable = bpm_blackmail_leader_sway_used
+		remove_variable = bpm_decrease_suffrage_sway_used
+	}
 }

@@ -1,0 +1,126 @@
+﻿bpm_assert_authority_sway_gui = {
+	scope = interest_group
+	is_shown = {
+		bpm_law_enactment_ruler_approval > 0
+		NOT = { has_variable = bpm_assert_authority_sway_used }
+	}
+	is_valid = {
+		owner.var:bpm_law_sway_maneuvers > 0
+	}
+	effect = {
+		set_variable = bpm_assert_authority_sway_used
+		owner = { change_variable = { name = bpm_law_sway_maneuvers subtract = 1 }}
+		owner = {
+			add_modifier = {
+				name = bpm_law_sway_assert_authority_used
+				years = bpm_law_sway_authority_duration_years
+			}
+		}
+	}
+}
+
+bpm_assert_authority_neg_sway_gui = {
+	scope = interest_group
+	is_shown = {
+		bpm_law_enactment_ruler_approval < 0
+		NOT = { has_variable = bpm_assert_authority_neg_sway_used }
+	}
+	is_valid = {
+		owner.var:bpm_law_sway_maneuvers > 0
+	}
+	effect = {
+		set_variable = bpm_assert_authority_neg_sway_used
+		owner = { change_variable = { name = bpm_law_sway_maneuvers subtract = 1 }}
+		owner = {
+			add_modifier = {
+				name = bpm_law_sway_assert_authority_used
+				years = bpm_law_sway_authority_duration_years
+			}
+		}
+	}
+}
+
+bpm_redeem_favors_sway_gui = {
+	scope = interest_group
+	is_shown = {
+		ig_approval > 0
+		NOT = { has_variable = bpm_redeem_favors_sway_used }
+	}
+	is_valid = {
+		owner.var:bpm_law_sway_maneuvers > 0
+	}
+	effect = {
+		set_variable = bpm_redeem_favors_sway_used
+		owner = { change_variable = { name = bpm_law_sway_maneuvers subtract = 1 }}
+		add_modifier = {
+			name = bpm_law_sway_redeem_favors_used
+			years = bpm_law_sway_approval_duration_years
+		}
+	}
+}
+
+bpm_blackmail_leader_sway_gui = {
+	scope = interest_group
+	is_shown = {
+		ig_approval > -10
+		leader = {
+			OR = {
+				has_trait = cruel
+				has_trait = hedonist
+				has_trait = wrathful
+				has_trait = bandit
+				has_trait = pillager
+				has_trait = war_criminal
+				has_trait = romantic
+				has_trait = alcoholic
+				has_trait = opium_addiction
+				has_trait = cocaine_addiction
+				has_trait = grifter
+				has_trait = senile
+				has_trait = psychological_affliction
+				has_trait = expensive_tastes
+			}
+		}
+		NOT = { has_variable = bpm_blackmail_leader_sway_used }
+	}
+	is_valid = {
+		owner.var:bpm_law_sway_maneuvers > 0
+	}
+	effect = {
+		set_variable = bpm_blackmail_leader_sway_used
+		owner = { change_variable = { name = bpm_law_sway_maneuvers subtract = 1 }}
+		add_modifier = {
+			name = bpm_law_sway_blackmail_leader_used
+			years = bpm_law_sway_approval_duration_years
+		}
+	}
+}
+
+bpm_decrease_suffrage_sway_gui = {
+	scope = interest_group
+	is_shown = {
+		OR = {
+			is_interest_group_type = ig_landowners
+			# has_ideology = ideology:ideology_dop_authoritarian_democrat
+			bpm_ig_is_anti_democratic = yes
+			leader = { bpm_leader_is_reactionary = yes }
+		}
+		owner = {
+			institution_investment_level = { institution = institution_suffrage value > 1 }
+		}
+		NOT = { has_variable = bpm_decrease_suffrage_sway_used }
+	}
+	is_valid = {
+		owner.var:bpm_law_sway_maneuvers > 0
+	}
+	effect = {
+		set_variable = bpm_decrease_suffrage_sway_used
+		owner = { change_variable = { name = bpm_law_sway_maneuvers subtract = 1 }}
+		owner = {
+			change_institution_investment_level = {
+				institution = institution_suffrage
+				investment = -1
+			}
+		}
+	}
+}

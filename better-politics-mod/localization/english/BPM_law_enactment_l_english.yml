@@ -8,3 +8,34 @@
  bpm_ig_law_support_from_low_approval:0 "From #red Low [concept_approval]#!"
  bpm_ig_law_support_from_very_low_approval:0 "From #red Very Low [concept_approval]#!"
  bpm_ig_law_support_from_ruler:0 "From [Concept('concept_ruler','Head of State')] [concept_law] #yellow Support#!"
+ bpm_ig_law_support_from_insurrectionary:0 "From Insurrectionary"
+
+ bpm_law_support:0 "Law Vote"
+ bpm_law_support_label:0 "#v $bpm_law_support$#!"
+ bpm_law_enactment_success_vote_contribution:0 "From Projected Law Vote"
+
+ bpm_law_support_sway:0 "Sway Law Support"
+ bpm_law_support_sway_label:0 "$bpm_law_support_sway$ (@maneuvers!1)"
+
+ bpm_law_support_sway_maneuvers:0 "@maneuvers![GetPlayer.MakeScope.ScriptValue('bpm_law_sway_maneuvers_value')|v0] (#P +5#! per [Concept('concept_enactment_phase','Phase')])"
+
+ bpm_law_sway_assert_authority:0 "#v Assert Executive Authority#!"
+ bpm_law_sway_assert_authority_used:0 "Asserted Executive Authority"
+ bpm_law_sway_assert_authority_cost:0 "@aut! #N -50#! for [GetPlayer.MakeScope.ScriptValue('bpm_law_sway_authority_duration_years')] years"
+ bpm_law_sway_assert_authority_effect:0 "[GetPlayer.MakeScope.ScriptValue('bpm_law_sway_assert_authority_effect_value')|v0+=]"
+ bpm_law_sway_assert_authority_neg_effect:0 "[GetPlayer.MakeScope.ScriptValue('bpm_law_sway_assert_authority_neg_effect_value')|v0+=]"
+
+ bpm_law_sway_decrease_suffrage:0 "#v Undermine Suffrage#!"
+ bpm_law_sway_decrease_suffrage_used:0 "Undermined #yellow $institution_suffrage$#! Institution"
+ bpm_law_sway_decrease_suffrage_cost:0 "#N -1#! #yellow $institution_suffrage$#! Investment"
+ bpm_law_sway_decrease_suffrage_effect:0 "[GetPlayer.MakeScope.ScriptValue('bpm_law_sway_decrease_suffrage_effect_value')|v0+=]"
+
+ bpm_law_sway_redeem_favors:0 "#v Redeem Favors#!"
+ bpm_law_sway_redeem_favors_used:0 "Redeemed Favors"
+ bpm_law_sway_redeem_favors_cost:0 "#N -5#! [concept_approval] for [GetPlayer.MakeScope.ScriptValue('bpm_law_sway_approval_duration_years')] years"
+ bpm_law_sway_redeem_favors_effect:0 "[GetPlayer.MakeScope.ScriptValue('bpm_law_sway_redeem_favors_effect_value')|v0+=]"
+
+ bpm_law_sway_blackmail_leader:0 "#v Blackmail Leader#!"
+ bpm_law_sway_blackmail_leader_used:0 "Blackmailed Leader"
+ bpm_law_sway_blackmail_leader_cost:0 "#N -10#! [concept_approval] for [GetPlayer.MakeScope.ScriptValue('bpm_law_sway_approval_duration_years')] years"
+ bpm_law_sway_blackmail_leader_effect:0 "[GetPlayer.MakeScope.ScriptValue('bpm_law_sway_blackmail_leader_effect_value')|v0+=]"

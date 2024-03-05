@@ -13,6 +13,7 @@ on_half_yearly_pulse_country = {
 on_monthly_pulse_country = {
 	on_actions = {
 		on_bpm_monthly_pulse_country
+		bpm_update_enactment_success_on_action
 	}
 }
 
@@ -113,12 +114,6 @@ on_country_formed = {
 on_party_created = {
 	on_actions = {
 		on_bpm_party_created
-	}
-}
-
-on_law_enactment_started = {
-	on_actions = {
-		on_bpm_law_enactment_started
 	}
 }
 
@@ -480,11 +475,5 @@ on_bpm_party_created = {
 			}
 			bpm_set_new_party_loyalty = yes
 		}
-	}
-}
-
-on_bpm_law_enactment_started = {
-	effect = {
-		bpm_set_all_igs_law_support_fixed_vars = yes
 	}
 }

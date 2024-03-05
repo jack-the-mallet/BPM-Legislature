@@ -36,7 +36,7 @@
 			}
 			
 			# law voting
-			politics_panel_law_voting_item = {
+			bpm_politics_panel_law_voting_item = {
 				visible = yes
 				# visible = "[Not(GetVariableSystem.Exists('reform_government'))]"
 			}
@@ -338,7 +338,7 @@
 								}
 								icon = {
 									texture = "gfx/interface/icons/generic_icons/population_radical.dds"
-									size = { 40 40 }
+									size = { 28 28 }
 								}
 								textbox = {
 									layoutpolicy_horizontal = expanding
@@ -389,7 +389,7 @@
 								}
 								icon = {
 									texture = "gfx/interface/icons/generic_icons/population_loyalist.dds"
-									size = { 40 40 }
+									size = { 28 28 }
 								}
 								textbox = {
 									layoutpolicy_horizontal = expanding

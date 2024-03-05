@@ -1,10 +1,59 @@
-﻿# Root = owner Country of the Law
+﻿on_law_enactment_started = {
+	on_actions = {
+		on_bpm_law_enactment_started
+	}
+}
+
+on_law_checkpoint_advance = {
+	on_actions = {
+		bpm_update_enactment_success_on_action
+	}
+}
+
+on_law_checkpoint_stall = {
+	on_actions = {
+		bpm_update_enactment_success_on_action
+	}
+}
+
+on_law_checkpoint_debate = {
+	on_actions = {
+		bpm_update_enactment_success_on_action
+	}
+}
+
+on_bpm_law_enactment_started = {
+	effect = {
+		bpm_clear_law_sway_vars = yes
+		bpm_set_all_igs_law_support_fixed_vars = yes
+		set_variable = {
+			name = bpm_law_sway_maneuvers
+			value = 5
+		}
+	}
+}
+
+bpm_update_enactment_success_on_action = {
+	effect = {
+		remove_enactment_modifier = bpm_law_enactment_success_vote_contribution
+		add_enactment_modifier = {
+			name = bpm_law_enactment_success_vote_contribution
+			multiplier = bpm_law_enactment_yea_votes
+		}
+	}
+}
+
+# Root = owner Country of the Law
 # Executed when the end of a checkpoint is reached and the result is success
 on_law_checkpoint_success = {
 	effect = {
 		if = {
 			limit = {
 				enacting_any_law = yes
+			}
+			change_variable = {
+				name = bpm_law_sway_maneuvers
+				add = 5
 			}
 			if = {
 				limit = { enactment_phase = 2 }
@@ -31,5 +80,8 @@ on_law_checkpoint_success = {
 				trigger_event = { id = law_notification.4 days = 0 }
 			}
 		}
+	}
+	on_actions = {
+		bpm_update_enactment_success_on_action
 	}
 }
