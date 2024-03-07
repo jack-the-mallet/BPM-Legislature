@@ -1,4 +1,14 @@
 ﻿l_english:
+ bpm_current_reform_title:0 "$LAW_FROM_TO$"
+ bpm_legislative_vote_title:0 "#v Projected Legislative Vote#!"
+ bpm_next_checkpoint_text:0 "Next checkpoint: #tooltippable #tooltip:[Law.GetTooltipTag],LAW_NEXT_CHECKPOINT_TIME_FACTORS_TOOLTIP #v [Law.GetCheckpointEndDateString]#!#!#!"
+ bpm_law_yea_votes:0 "#P Yea#!\n#v #variable [GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_yea_votes')|%1]#!"
+ bpm_law_nay_votes:0 "#N Nay#!\n#v #variable [GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_nay_votes')|%1]#!"
+ bpm_law_voting_phase_pass_info:0 "#v At the final [Concept('concept_enactment_phase','Phase')], the legislature will vote @approves!#!"
+ bpm_law_voting_phase_fail_info:0 "#v At the final [Concept('concept_enactment_phase','Phase')], the legislature will vote @disapproves!#!"
+ bpm_law_vote_enactment_contribution_info:0 "#v Projected #P Yea#! votes grant [GetPlayer.MakeScope.ScriptValue('bpm_law_vote_enactment_contribution_value')|+=%1] [Concept('concept_enactment_success','Enactment Chance')]#!"
+ bpm_law_voting_phase_sways_info:0 "#v [Concept('concept_bpm_law_sway','Law Sways')] Remaining#!"
+
  bpm_ig_law_support_tooltip:0 "[InterestGroup.MakeScope.GetScriptValueDesc('bpm_ig_law_support_total_value')]"
  bpm_ig_law_support_current_law:0 "From #yellow Current#! [concept_law]"
  bpm_ig_law_support_current_law_like:0 "From #yellow Likes Current#! [concept_law]"

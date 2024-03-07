@@ -266,3 +266,10 @@ bpm_law_enactment_nay_votes = {
 		}
 	}
 }
+
+bpm_law_vote_enactment_contribution_value = {
+	if = {
+		limit = { has_variable = bpm_law_vote_enactment_contribution_var }
+		value = var:bpm_law_vote_enactment_contribution_var
+	}
+}

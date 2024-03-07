@@ -205,4 +205,11 @@ bpm_apply_law_vote_contribution_modifier = {
 			multiplier = owner.bpm_law_enactment_yea_votes
 		}
 	}
+	set_variable = {
+		name = bpm_law_vote_enactment_contribution_var
+		value = {
+			value = bpm_law_enactment_yea_votes
+			multiply = 0.5
+		}
+	}
 }

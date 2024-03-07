@@ -903,38 +903,6 @@
 		}
 	}
 
-	type bpm_politics_panel_law_voting_item = hbox {
-		textbox = {
-			margin_right = 10
-			autoresize = yes
-			minimumsize = { 60 0 }
-			layoutpolicy_horizontal = growing
-			align = nobaseline|left
-			tooltip = "[GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_yea_votes')]"
-			text = "#v #variable [GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_yea_votes')|%1]#! #P YEA#!"
-		}
-		gold_progressbar_horizontal = {
-			name = "bpm_law_voting"
-			layoutpolicy_horizontal = expanding
-			size = { 600 25 }
-			tooltip = "bpm_law_voting_tooltip"
-			blockoverride "values" {
-				value = "[GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_yea_votes')]"
-				min = 0
-				max = 1
-			}
-		}
-		textbox = {
-			margin_left = 10
-			autoresize = yes
-			minimumsize = { 60 0 }
-			layoutpolicy_horizontal = growing
-			align = nobaseline|left
-			tooltip = "[GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_nay_votes')]"
-			text = "#v #variable [GetPlayer.MakeScope.ScriptValue('bpm_law_enactment_nay_votes')|%1]#! #N NAY#!"
-		}
-	}
-
 	type bpm_law_sway_menu_item = button_standard_list {
 		layoutpolicy_horizontal = expanding
 		block "sway_datacontext" {
