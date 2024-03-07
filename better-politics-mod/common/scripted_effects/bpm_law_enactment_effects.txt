@@ -184,6 +184,25 @@ bpm_clear_law_sway_vars = {
 		remove_variable = bpm_assert_authority_neg_sway_used
 		remove_variable = bpm_redeem_favors_sway_used
 		remove_variable = bpm_blackmail_leader_sway_used
+		remove_variable = bpm_entrench_privileges_sway_used
+		remove_variable = bpm_public_debate_sway_used
 		remove_variable = bpm_decrease_suffrage_sway_used
+		remove_variable = bpm_decrease_police_sway_used
+		remove_variable = bpm_decrease_home_affairs_sway_used
+		remove_variable = bpm_tax_break_rich_sway_used
+		remove_variable = bpm_tax_break_middle_sway_used
+		remove_variable = bpm_tax_break_poor_sway_used
+		remove_variable = bpm_tax_break_peasant_sway_used
+	}
+}
+
+bpm_apply_law_vote_contribution_modifier = {
+	remove_enactment_modifier = bpm_law_enactment_success_vote_contribution
+	if = {
+		limit = { is_player = yes }
+		add_enactment_modifier = {
+			name = bpm_law_enactment_success_vote_contribution
+			multiplier = owner.bpm_law_enactment_yea_votes
+		}
 	}
 }

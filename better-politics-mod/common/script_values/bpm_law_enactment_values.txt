@@ -176,10 +176,66 @@ bpm_law_enactment_sway_modifiers_value = {
 		}
 	}
 	if = {
+		limit = { has_variable = bpm_entrench_privileges_sway_used }
+		add = {
+			value = bpm_law_sway_entrench_privileges_effect_value
+			desc = "bpm_law_sway_entrench_privileges_used"
+		}
+	}
+	if = {
+		limit = { has_variable = bpm_public_debate_sway_used }
+		add = {
+			value = bpm_law_sway_public_debate_effect_value
+			desc = "bpm_law_sway_public_debate_used"
+		}
+	}
+	if = {
 		limit = { has_variable = bpm_decrease_suffrage_sway_used }
 		add = {
-			value = bpm_law_sway_decrease_suffrage_effect_value
+			value = bpm_law_sway_decrease_institution_effect_value
 			desc = "bpm_law_sway_decrease_suffrage_used"
+		}
+	}
+	if = {
+		limit = { has_variable = bpm_decrease_police_sway_used }
+		add = {
+			value = bpm_law_sway_decrease_institution_effect_value
+			desc = "bpm_law_sway_decrease_police_used"
+		}
+	}
+	if = {
+		limit = { has_variable = bpm_decrease_home_affairs_sway_used }
+		add = {
+			value = bpm_law_sway_decrease_institution_effect_value
+			desc = "bpm_law_sway_decrease_home_affairs_used"
+		}
+	}
+	if = {
+		limit = { has_variable = bpm_tax_break_rich_sway_used }
+		add = {
+			value = bpm_law_sway_tax_break_rich_effect_value
+			desc = "bpm_law_sway_tax_break_rich_used"
+		}
+	}
+	if = {
+		limit = { has_variable = bpm_tax_break_middle_sway_used }
+		add = {
+			value = bpm_law_sway_tax_break_middle_effect_value
+			desc = "bpm_law_sway_tax_break_middle_used"
+		}
+	}
+	if = {
+		limit = { has_variable = bpm_tax_break_poor_sway_used }
+		add = {
+			value = bpm_law_sway_tax_break_poor_effect_value
+			desc = "bpm_law_sway_tax_break_poor_used"
+		}
+	}
+	if = {
+		limit = { has_variable = bpm_tax_break_peasant_sway_used }
+		add = {
+			value = bpm_law_sway_tax_break_peasant_effect_value
+			desc = "bpm_law_sway_tax_break_peasant_used"
 		}
 	}
 

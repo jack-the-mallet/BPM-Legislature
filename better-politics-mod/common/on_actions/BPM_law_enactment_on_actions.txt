@@ -35,11 +35,7 @@ on_bpm_law_enactment_started = {
 
 bpm_update_enactment_success_on_action = {
 	effect = {
-		remove_enactment_modifier = bpm_law_enactment_success_vote_contribution
-		add_enactment_modifier = {
-			name = bpm_law_enactment_success_vote_contribution
-			multiplier = bpm_law_enactment_yea_votes
-		}
+		bpm_apply_law_vote_contribution_modifier = yes
 	}
 }
 
@@ -56,24 +52,27 @@ on_law_checkpoint_success = {
 				add = 5
 			}
 			if = {
-				limit = { enactment_phase = 2 }
+				limit = { is_player = yes }
 				if = {
-					limit = { bpm_law_enactment_yea_votes > bpm_law_enactment_nay_votes }
-					add_enactment_phase = 1
-				}
-				else = {
-					add_enactment_setback = 1
+					limit = { enactment_phase = 2 }
 					if = {
-						limit = { enactment_setback_count = 3 }
-						trigger_event = { id = unable_to_enact.2 popup = yes }
+						limit = { bpm_law_enactment_yea_votes > bpm_law_enactment_nay_votes }
+						add_enactment_phase = 1
+					}
+					else = {
+						add_enactment_setback = 1
+						if = {
+							limit = { enactment_setback_count = 3 }
+							trigger_event = { id = unable_to_enact.2 popup = yes }
+						}
 					}
 				}
-			}
-			else_if = {
-				limit = { enactment_phase = 1 }
-				add_enactment_modifier = { name = bpm_law_voting_guarantee_success }
-				add_enactment_phase = 1
-				trigger_event = { id = law_notification.4 days = 0 }
+				else_if = {
+					limit = { enactment_phase = 1 }
+					add_enactment_modifier = { name = bpm_law_voting_guarantee_success }
+					add_enactment_phase = 1
+					trigger_event = { id = law_notification.4 days = 0 }
+				}
 			}
 			else = {
 				add_enactment_phase = 1
